@@ -1,0 +1,21 @@
+parameters:
+#    msi_cms.example.class: Msi\CmsBundle\Example
+
+services:
+    msi_cms.page_listener:
+        class: Msi\CmsBundle\EventListener\PageListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_cms.block_listener:
+        class: Msi\CmsBundle\EventListener\BlockListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    msi_cms.menu_listener:
+        class: Msi\CmsBundle\EventListener\MenuListener
+        arguments: [ @service_container ]
+        tags:
+            - { name: doctrine.event_subscriber }

@@ -1,0 +1,26 @@
+Msi\CmsBundle\Entity\MenuTranslation:
+    properties:
+        name:
+            - NotBlank: ~
+
+Msi\CmsBundle\Entity\Page:
+    properties:
+        template:
+            - NotBlank: ~
+
+Msi\CmsBundle\Entity\PageTranslation:
+    properties:
+        title:
+            - NotBlank: ~
+
+Msi\CmsBundle\Entity\Site:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: host
+    properties:
+        host:
+            - NotBlank: ~
+
+Msi\CmsBundle\Entity\Block:
+    properties:
+        name:
+            - NotBlank: ~

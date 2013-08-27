@@ -1,0 +1,73 @@
+services:
+    # Menu Root
+    msi_cms_menu_root_admin:
+        class: %msi_cms.menu_root.admin%
+        arguments: [ @msi_cms.menu_root_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+        calls:
+            - [ addChild, [ @msi_cms_menu_node_admin ] ]
+
+    msi_cms.menu_root_manager:
+        class: Msi\AdminBundle\Manager\MenuManager
+        arguments: [ %msi_cms.menu.class% ]
+        parent: msi_admin.manager
+
+    # Menu Node
+    msi_cms_menu_node_admin:
+        class: %msi_cms.menu_node.admin%
+        arguments: [ @msi_cms.menu_node_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+        calls:
+            - [ setParent, [ @msi_cms_menu_root_admin ] ]
+
+    msi_cms.menu_node_manager:
+        class: %msi_admin.manager.class%
+        arguments: [ %msi_cms.menu.class% ]
+        parent: msi_admin.manager
+
+    # Page
+    msi_cms_page_admin:
+        class: %msi_cms.page.admin%
+        arguments: [ @msi_cms.page_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+        calls:
+            - [addChild, [@msi_cms_block_admin]]
+
+    msi_cms.page_manager:
+        class: Msi\AdminBundle\Manager\PageManager
+        arguments: [ %msi_cms.page.class% ]
+        parent: msi_admin.manager
+
+    # Block
+    msi_cms_block_admin:
+        class: %msi_cms.block.admin%
+        arguments: [ @msi_cms.page_block_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+        calls:
+            - [setParent, [@msi_cms_page_admin]]
+
+    msi_cms.page_block_manager:
+        class: %msi_admin.manager.class%
+        arguments: [ %msi_cms.block.class% ]
+        parent: msi_admin.manager
+
+    # Site
+    msi_cms_site_admin:
+        class: %msi_cms.site.admin%
+        arguments: [ @msi_cms.site_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_cms.site_manager:
+        class: %msi_admin.manager.class%
+        arguments: [ %msi_cms.site.class% ]
+        parent: msi_admin.manager
