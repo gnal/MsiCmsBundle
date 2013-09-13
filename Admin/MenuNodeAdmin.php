@@ -86,7 +86,7 @@ class MenuNodeAdmin extends Admin
     public function buildTranslationForm(FormBuilder $builder)
     {
         $builder
-            ->add('published', 'checkbox')
+            // ->add('published', 'checkbox')
             ->add('name')
             ->add('route', 'text', ['label' => 'Url'])
         ;
