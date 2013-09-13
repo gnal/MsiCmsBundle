@@ -24,38 +24,42 @@ class PageAdmin extends Admin
         $builder
             ->add('published', 'boolean')
             ->add('title')
-            ->add('', 'action')
+            ->add('', 'action', [
+                'children' => false,
+            ])
         ;
     }
 
     public function buildForm(FormBuilder $builder)
     {
-        $collection = $this->container->get('router')->getRouteCollection();
-        $choices = [];
-        foreach ($collection->all() as $name => $route) {
-            if (preg_match('#^_#', $name)) {
-                continue;
+        if ($this->getUser()->isSuperAdmin()) {
+            $collection = $this->container->get('router')->getRouteCollection();
+            $choices = [];
+            foreach ($collection->all() as $name => $route) {
+                if (preg_match('#^_#', $name)) {
+                    continue;
+                }
+                if (preg_match('#^msi_page_#', $name)) {
+                    continue;
+                }
+                $choices[$name] = $name;
             }
-            if (preg_match('#^msi_page_#', $name)) {
-                continue;
-            }
-            $choices[$name] = $name;
-        }
 
-        $builder
-            ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_cms.page.layouts')])
-            ->add('showTitle')
-            ->add('route', 'choice', [
-                'empty_value' => '',
-                'choices' => $choices,
-            ])
-            ->add('css', 'textarea')
-            ->add('js', 'textarea')
-            // ->add('blocks', 'collection', [
-            //     'type' => new \Msi\AdminBundle\Form\Type\BlockType($this->container),
-            //     'allow_add' => true,
-            // ])
-        ;
+            $builder
+                ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_cms.page.layouts')])
+                ->add('showTitle')
+                ->add('route', 'choice', [
+                    'empty_value' => '',
+                    'choices' => $choices,
+                ])
+                ->add('css', 'textarea')
+                ->add('js', 'textarea')
+                // ->add('blocks', 'collection', [
+                //     'type' => new \Msi\AdminBundle\Form\Type\BlockType($this->container),
+                //     'allow_add' => true,
+                // ])
+            ;
+        }
 
         if ($this->container->getParameter('msi_cms.multisite')) {
             $builder->add('site', 'entity', [
@@ -67,7 +71,6 @@ class PageAdmin extends Admin
     public function buildTranslationForm(FormBuilder $builder)
     {
         $builder
-            ->add('published', 'checkbox')
             ->add('title')
             ->add('body', 'textarea', [
                 'attr' => [
