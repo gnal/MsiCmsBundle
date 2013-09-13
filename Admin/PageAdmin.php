@@ -112,5 +112,9 @@ class PageAdmin extends Admin
         if (!$this->container->getParameter('msi_cms.multisite')) {
             $entity->setSite($this->container->get('msi_admin.provider')->getSite());
         }
+
+        if ($entity->getTemplate() === null) {
+            $entity->setTemplate(array_keys($this->container->getParameter('msi_cms.page.layouts'))[0]);
+        }
     }
 }
