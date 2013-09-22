@@ -71,3 +71,16 @@ services:
         class: %msi_admin.manager.class%
         arguments: [ %msi_cms.site.class% ]
         parent: msi_admin.manager
+
+    # Email
+    msi_cms_email_admin:
+        class: Msi\CmsBundle\Admin\EmailAdmin
+        arguments: [ @msi_cms.email_manager ]
+        parent: msi_admin.admin
+        tags:
+            - { name: msi.admin }
+
+    msi_cms.email_manager:
+        class: %msi_admin.manager.class%
+        arguments: [ Msi\CmsBundle\Entity\Email ]
+        parent: msi_admin.manager

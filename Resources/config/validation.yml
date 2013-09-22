@@ -24,3 +24,23 @@ Msi\CmsBundle\Entity\Block:
     properties:
         name:
             - NotBlank: ~
+
+Msi\CmsBundle\Entity\Email:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+    properties:
+        name:
+            - NotBlank: ~
+        fromWho:
+            - NotBlank: ~
+            - Email: ~
+        toWho:
+            - NotBlank: ~
+            - Email: ~
+
+Msi\CmsBundle\Entity\EmailTranslation:
+    properties:
+        subject:
+            - NotBlank: ~
+        body:
+            - NotBlank: ~
