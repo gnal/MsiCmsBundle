@@ -47,6 +47,23 @@ abstract class PageTranslation
      */
     protected $metaDescription;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $metaTitle;
+
+    public function getMetaTitle()
+    {
+        return $this->metaTitle;
+    }
+
+    public function setMetaTitle($metaTitle)
+    {
+        $this->metaTitle = $metaTitle;
+
+        return $this;
+    }
+
     public function getBody()
     {
         return $this->body;
