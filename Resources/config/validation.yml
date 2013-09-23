@@ -26,8 +26,6 @@ Msi\CmsBundle\Entity\Block:
             - NotBlank: ~
 
 Msi\CmsBundle\Entity\Email:
-    constraints:
-        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
     properties:
         name:
             - NotBlank: ~
