@@ -39,6 +39,23 @@ class Email
      */
     protected $toWho;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $availableVars;
+
+    public function getAvailableVars()
+    {
+        return $this->availableVars;
+    }
+
+    public function setAvailableVars($availableVars)
+    {
+        $this->availableVars = $availableVars;
+
+        return $this;
+    }
+
     public function getEventName()
     {
         return $this->eventName;
