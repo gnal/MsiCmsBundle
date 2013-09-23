@@ -35,7 +35,6 @@ Msi\CmsBundle\Entity\Email:
             - NotBlank: ~
             - Email: ~
         toWho:
-            - NotBlank: ~
             - Email: ~
 
 Msi\CmsBundle\Entity\EmailTranslation:
