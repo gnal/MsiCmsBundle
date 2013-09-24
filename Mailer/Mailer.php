@@ -29,7 +29,7 @@ class Mailer
                         $code = str_replace('#', '', $matches[0]);
                         $getter = 'get'.ucfirst(strtolower($code));
 
-                        return $data->$getter();
+                        return is_array($data) ? $data[$code] : $data->$getter();
                     },
                     $email->getTranslation()->getBody()
                 );
