@@ -14,7 +14,7 @@ class PageAdmin extends Admin
         $this->options = [
             'form_template' => 'MsiAdminBundle:Page:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:Page:sidebar.html.twig',
-            'search_fields' => ['translations.title'],
+            'search_fields' => ['a.route', 'translations.title'],
             'order_by'      => ['translations.title' => 'ASC'],
         ];
     }
