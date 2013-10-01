@@ -15,7 +15,7 @@ class Mailer
         $this->templating = $templating;
     }
 
-    public function sendEmail($name, $data = null, $toWho = null)
+    public function sendEmail($name, $data = null, $toWho = null, $attachments = [])
     {
         $emails = $this->emailManager->findAll(
             ['a.name' => $name]
@@ -46,12 +46,13 @@ class Mailer
                 $email->getFromWho(),
                 $toWho ?: $email->getToWho(),
                 $email->getTranslation()->getSubject(),
-                $rendered
+                $rendered,
+                $attachments
             );
         }
     }
 
-    protected function send($fromWho, $toWho, $subject, $body)
+    protected function send($fromWho, $toWho, $subject, $body, $attachments = [])
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
@@ -59,6 +60,10 @@ class Mailer
             ->setTo($toWho)
             ->setBody($body, 'text/html')
         ;
+
+        foreach ($attachments as $attachment) {
+            $message->attach(\Swift_Attachment::fromPath($attachment));
+        }
 
         $this->mailer->send($message);
     }
