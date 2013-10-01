@@ -44,7 +44,7 @@ class Mailer
 
             $this->send(
                 $email->getFromWho(),
-                $toWho ?: $email->getToWho(),
+                $email->getToWho() ?: $toWho,
                 $email->getTranslation()->getSubject(),
                 $rendered,
                 $attachments
