@@ -27,7 +27,7 @@ class Mailer
                     '@#[a-zA-z0-9]+#@',
                     function ($matches) use ($data) {
                         $code = str_replace('#', '', $matches[0]);
-                        $getter = 'get'.ucfirst(strtolower($code));
+                        $getter = 'get'.ucfirst($code);
 
                         return is_array($data) ? $data[$code] : $data->$getter();
                     },
