@@ -5,11 +5,12 @@ namespace Msi\CmsBundle\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\Common\Collections\ArrayCollection;
+use Knp\Menu\NodeInterface;
 
 /**
  * @ORM\MappedSuperclass
  */
-abstract class Menu
+abstract class Menu implements NodeInterface
 {
     use \Msi\AdminBundle\Doctrine\Extension\Model\Timestampable;
     use \Msi\AdminBundle\Doctrine\Extension\Model\Translatable;
@@ -50,12 +51,44 @@ abstract class Menu
      */
     protected $targetBlank;
 
+    protected $options = [];
+
     public function __construct()
     {
         $this->translations = new ArrayCollection();
         $this->children = new ArrayCollection();
         $this->targetBlank = false;
         $this->operators = new ArrayCollection();
+    }
+
+    public function getName()
+    {
+        return $this->getTranslation()->getName();
+    }
+
+    public function getOptions()
+    {
+        $this->options['extras']['groups'] = $this->operators;
+        $this->options['extras']['published'] = $this->getTranslation()->getPublished();
+
+        if ($this->page) {
+            if (!$this->page->getRoute()) {
+                $this->options['route'] = 'msi_page_show';
+                $this->options['routeParameters'] = ['slug' => $this->page->getTranslation()->getSlug()];
+            } else {
+                $this->options['route'] = $this->page->getRoute();
+            }
+        } else if (preg_match('#^@#', $this->getTranslation()->getRoute())) {
+            $this->options['route'] = substr($this->getTranslation()->getRoute(), 1);
+        } else {
+            $this->options['uri'] = $this->getTranslation()->getRoute();
+        }
+
+        if ($this->targetBlank) {
+            $this->options['linkAttributes'] = array('target' => '_blank');
+        }
+
+        return $this->options;
     }
 
     public function getOperators()
