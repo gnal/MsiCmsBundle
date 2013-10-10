@@ -51,6 +51,11 @@ abstract class Menu implements NodeInterface
      */
     protected $targetBlank;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $attr;
+
     protected $options = [];
 
     public function __construct()
@@ -85,10 +90,26 @@ abstract class Menu implements NodeInterface
         }
 
         if ($this->targetBlank) {
-            $this->options['linkAttributes'] = array('target' => '_blank');
+            $this->options['linkAttributes']['target'] = '_blank';
+        }
+
+        if ($this->attr) {
+            // ...
         }
 
         return $this->options;
+    }
+
+    public function getAttr()
+    {
+        return $this->attr;
+    }
+
+    public function setAttr($attr)
+    {
+        $this->attr = $attr;
+
+        return $this;
     }
 
     public function getOperators()
