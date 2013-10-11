@@ -94,7 +94,11 @@ abstract class Menu implements NodeInterface
         }
 
         if ($this->attr) {
-            // ...
+            $parts = explode(',', $this->attr);
+            foreach ($parts as $part) {
+                $pieces = explode('=', $part);
+                $this->options['linkAttributes'][$pieces[0]] = $pieces[1];
+            }
         }
 
         return $this->options;
