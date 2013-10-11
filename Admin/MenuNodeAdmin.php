@@ -59,7 +59,7 @@ class MenuNodeAdmin extends Admin
         $builder
             ->add('page', 'entity', [
                 'required' => false,
-                'empty_value' => '',
+                'empty_value' => 'choisir une page',
                 'class' => $this->container->getParameter('msi_cms.page.class'),
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('a')
