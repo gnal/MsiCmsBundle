@@ -45,6 +45,22 @@ class PageAdmin extends Admin
                 $choices[$name] = $name;
             }
 
+            $qb = $this->container->get('msi_cms.page_manager')->getMasterQueryBuilder(
+                [],
+                [
+                    'a.translations' => 'translations',
+                ],
+                [
+                    'translations.title' => 'ASC',
+                ]
+            );
+
+            if ($id = $this->getObject()->getId()) {
+                $qb->andWhere($qb->expr()->neq('a.id', $id));
+            }
+
+            $parentChoices = $qb->getQuery()->execute();
+
             $builder
                 ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_cms.page.layouts')])
                 ->add('showTitle')
@@ -54,6 +70,11 @@ class PageAdmin extends Admin
                 ])
                 ->add('css', 'textarea')
                 ->add('js', 'textarea')
+                ->add('parent', 'entity', [
+                    'empty_value' => '',
+                    'class' => $this->container->getParameter('msi_cms.page.class'),
+                    'choices' => $parentChoices,
+                ])
                 // ->add('blocks', 'collection', [
                 //     'type' => new \Msi\AdminBundle\Form\Type\BlockType($this->container),
                 //     'allow_add' => true,

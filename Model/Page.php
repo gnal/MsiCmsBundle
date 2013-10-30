@@ -49,6 +49,8 @@ abstract class Page
 
     protected $site;
 
+    protected $parent;
+
     public function __construct()
     {
         $this->showTitle = true;
@@ -64,6 +66,18 @@ abstract class Page
     public function setShowTitle($showTitle)
     {
         $this->showTitle = $showTitle;
+
+        return $this;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
 
         return $this;
     }

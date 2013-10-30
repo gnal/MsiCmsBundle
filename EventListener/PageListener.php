@@ -43,6 +43,18 @@ class PageListener implements EventSubscriber
             ]);
         }
 
+        if (!$metadata->hasAssociation('parent')) {
+            $metadata->mapManyToOne([
+                'fieldName'    => 'parent',
+                'targetEntity' => $this->container->getParameter('msi_cms.page.class'),
+                'joinColumns' => [
+                    [
+                        'onDelete' => 'SET NULL',
+                    ],
+                ],
+            ]);
+        }
+
         if (!$metadata->hasAssociation('blocks')) {
             $metadata->mapManyToMany([
                 'fieldName'    => 'blocks',
