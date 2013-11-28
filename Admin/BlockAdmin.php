@@ -25,7 +25,6 @@ class BlockAdmin extends Admin
         $builder
             ->add('name')
             ->add('type')
-            ->add('', 'action')
         ;
     }
 

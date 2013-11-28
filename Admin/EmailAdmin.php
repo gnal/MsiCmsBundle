@@ -14,7 +14,6 @@ class EmailAdmin extends Admin
             ->add('published', 'boolean')
             ->add('name')
             ->add('subject')
-            ->add('', 'action')
         ;
     }
 

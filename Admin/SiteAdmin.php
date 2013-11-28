@@ -23,7 +23,6 @@ class SiteAdmin extends Admin
             ->add('enabled', 'boolean')
             ->add('brand')
             ->add('host')
-            ->add('', 'action')
         ;
     }
 

@@ -24,9 +24,6 @@ class PageAdmin extends Admin
         $builder
             ->add('published', 'boolean')
             ->add('title')
-            ->add('', 'action', [
-                'children' => false,
-            ])
         ;
     }
 

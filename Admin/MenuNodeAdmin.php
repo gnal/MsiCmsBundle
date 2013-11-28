@@ -27,7 +27,6 @@ class MenuNodeAdmin extends Admin
         $builder
             ->add('published', 'boolean')
             ->add('name', 'tree')
-            ->add('', 'action')
         ;
     }
 
