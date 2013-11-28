@@ -95,6 +95,7 @@ class PageAdmin extends Admin
                     'class' => 'tinymce',
                 ],
             ])
+            ->add('metaTitle')
             ->add('metaKeywords', 'textarea')
             ->add('metaDescription', 'textarea')
         ;
