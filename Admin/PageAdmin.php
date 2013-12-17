@@ -62,6 +62,7 @@ class PageAdmin extends Admin
                 ->add('template', 'choice', ['choices' => $this->container->getParameter('msi_cms.page.layouts')])
                 ->add('showTitle')
                 ->add('route', 'choice', [
+                    'required' => false,
                     'empty_value' => '',
                     'choices' => $choices,
                 ])
