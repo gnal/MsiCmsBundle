@@ -18,7 +18,13 @@ class Mailer
     public function sendEmail($name, $data = null, $toWho = null, $attachments = [])
     {
         $emails = $this->emailManager->findAll(
-            ['a.name' => $name]
+            [
+                'a.name' => $name,
+                't.published' => true,
+            ],
+            [
+                'a.translations' => 'translations',
+            ]
         );
 
         foreach ($emails as $email) {
