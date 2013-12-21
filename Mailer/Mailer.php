@@ -20,7 +20,7 @@ class Mailer
         $emails = $this->emailManager->findAll(
             [
                 'a.name' => $name,
-                't.published' => true,
+                'translations.published' => true,
             ],
             [
                 'a.translations' => 'translations',
