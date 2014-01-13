@@ -70,6 +70,7 @@ class PageAdmin extends Admin
                 ->add('js', 'textarea')
                 ->add('parent', 'entity', [
                     'empty_value' => '',
+                    'required' => false,
                     'class' => $this->container->getParameter('msi_cms.page.class'),
                     'choices' => $parentChoices,
                 ])
