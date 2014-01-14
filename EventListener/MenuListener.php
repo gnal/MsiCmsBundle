@@ -37,7 +37,7 @@ class MenuListener implements EventSubscriber
                 'targetEntity' => $this->container->getParameter('msi_cms.page.class'),
                 'joinColumns' => [
                     [
-                        'onDelete' => 'CASCADE',
+                        'onDelete' => 'SET NULL',
                     ],
                 ],
             ]);
