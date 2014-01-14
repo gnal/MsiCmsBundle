@@ -52,6 +52,15 @@ class PageListener implements EventSubscriber
                         'onDelete' => 'SET NULL',
                     ],
                 ],
+                'inversedBy' => 'children',
+            ]);
+        }
+
+        if (!$metadata->hasAssociation('children')) {
+            $metadata->mapOneToMany([
+                'fieldName'    => 'children',
+                'targetEntity' => $this->container->getParameter('msi_cms.page.class'),
+                'mappedBy' => 'parent',
             ]);
         }
 

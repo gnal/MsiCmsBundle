@@ -51,11 +51,26 @@ abstract class Page
 
     protected $parent;
 
+    protected $children;
+
     public function __construct()
     {
         $this->showTitle = true;
         $this->blocks = new ArrayCollection();
         $this->translations = new ArrayCollection();
+        $this->children = new ArrayCollection;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
+
+    public function setChildren($children)
+    {
+        $this->children = $children;
+
+        return $this;
     }
 
     public function getShowTitle()
