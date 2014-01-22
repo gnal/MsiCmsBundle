@@ -11,7 +11,9 @@ class EmailAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
-            ->add('published', 'boolean')
+            ->add('published', 'boolean', [
+                'label' => 'Enabled',
+            ])
             ->add('name')
             ->add('subject')
         ;
