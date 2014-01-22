@@ -1,0 +1,8 @@
+Name: Name
+Fromwho: From
+Towho: To
+Availablevars: Available Variables
+Subject: Subject
+Body: Content
+
+availablevars_data_help: "Variables that you can use in the content. How to use: Welcome #firstName# #lastName#!"

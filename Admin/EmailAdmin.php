@@ -23,7 +23,11 @@ class EmailAdmin extends Admin
             ->add('name')
             ->add('fromWho')
             ->add('toWho')
-            ->add('availableVars')
+            ->add('availableVars', 'textarea', [
+                'attr' => [
+                    'data-help' => $this->container->get('translator')->trans('availablevars_data_help'),
+                ],
+            ])
         ;
     }
 
