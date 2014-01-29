@@ -40,9 +40,43 @@ class Email
     protected $toWho;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $cc;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $bcc;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     protected $availableVars;
+
+    public function getCc()
+    {
+        return $this->cc;
+    }
+
+    public function setCc($cc)
+    {
+        $this->cc = $cc;
+
+        return $this;
+    }
+
+    public function getBcc()
+    {
+        return $this->bcc;
+    }
+
+    public function setBcc($bcc)
+    {
+        $this->bcc = $bcc;
+
+        return $this;
+    }
 
     public function getAvailableVars()
     {

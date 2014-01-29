@@ -48,9 +48,18 @@ class Mailer
                 'body' => $body,
             ]);
 
+            // set to
+
+            $toWho = $toWho ? ', '.$toWho : '';
+            $toWho = explode(', ', $email->getToWho().$toWho);
+
+            // send email
+
             $this->send(
                 $email->getFromWho(),
-                $email->getToWho() ?: $toWho,
+                $toWho,
+                $email->getCc(),
+                $email->getBcc(),
                 $email->getTranslation()->getSubject(),
                 $rendered,
                 $attachments
@@ -58,12 +67,14 @@ class Mailer
         }
     }
 
-    protected function send($fromWho, $toWho, $subject, $body, $attachments = [])
+    protected function send($fromWho, $toWho, $cc, $bcc, $subject, $body, $attachments = [])
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromWho)
             ->setTo($toWho)
+            ->setCc($cc)
+            ->setBcc($bcc)
             ->setBody($body, 'text/html')
         ;
 

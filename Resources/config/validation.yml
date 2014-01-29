@@ -32,8 +32,6 @@ Msi\CmsBundle\Entity\Email:
         fromWho:
             - NotBlank: ~
             - Email: ~
-        toWho:
-            - Email: ~
 
 Msi\CmsBundle\Entity\EmailTranslation:
     properties:

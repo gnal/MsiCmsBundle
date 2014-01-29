@@ -23,6 +23,8 @@ class EmailAdmin extends Admin
             ->add('name')
             ->add('fromWho')
             ->add('toWho')
+            ->add('cc')
+            ->add('bcc')
             ->add('availableVars')
         ;
     }
