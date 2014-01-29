@@ -54,13 +54,33 @@ class Mailer
                 $toWho = ', '.$toWho;
             }
 
+            // fix stuff to be array
+
+            if ($email->getToWho().$toWho) {
+                $to = explode(', ', $email->getToWho().$toWho);
+            } else {
+                $to = [];
+            }
+
+            if ($email->getCc()) {
+                $cc = explode(', ', $email->getCc());
+            } else {
+                $cc = [];
+            }
+
+            if ($email->getBcc()) {
+                $bcc = explode(', ', $email->getBcc());
+            } else {
+                $bcc = [];
+            }
+
             // send email
 
             $this->send(
                 $email->getFromWho(),
-                explode(', ', $email->getToWho().$toWho),
-                explode(', ', $email->getCc()),
-                explode(', ', $email->getBcc()),
+                $to,
+                $cc,
+                $bcc,
                 $email->getTranslation()->getSubject(),
                 $rendered,
                 $attachments
