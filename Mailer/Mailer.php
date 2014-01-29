@@ -48,18 +48,17 @@ class Mailer
                 'body' => $body,
             ]);
 
-            // set to
+            // fix "to" to merge it with entity "to"
 
             $toWho = $toWho ? ', '.$toWho : '';
-            $toWho = explode(', ', $email->getToWho().$toWho);
 
             // send email
 
             $this->send(
                 $email->getFromWho(),
-                $toWho,
-                $email->getCc(),
-                $email->getBcc(),
+                explode(', ', $email->getToWho().$toWho),
+                explode(', ', $email->getCc()),
+                explode(', ', $email->getBcc()),
                 $email->getTranslation()->getSubject(),
                 $rendered,
                 $attachments
