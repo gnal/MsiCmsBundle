@@ -11,7 +11,9 @@ class EmailAdmin extends Admin
     public function buildGrid(GridBuilder $builder)
     {
         $builder
-            ->add('published', 'boolean')
+            ->add('published', 'boolean', [
+                'label' => 'Enabled',
+            ])
             ->add('name')
             ->add('subject')
         ;
@@ -25,7 +27,11 @@ class EmailAdmin extends Admin
             ->add('toWho')
             ->add('cc')
             ->add('bcc')
-            ->add('availableVars')
+            ->add('availableVars', 'textarea', [
+                'attr' => [
+                    'data-help' => $this->container->get('translator')->trans('availablevars_data_help'),
+                ],
+            ])
         ;
     }
 
