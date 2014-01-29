@@ -51,7 +51,7 @@ class Mailer
             // fix "to" to merge it with entity "to"
 
             if ($email->getToWho() && $toWho) {
-                $toWho = $toWho ? ', '.$toWho : '';
+                $toWho = ', '.$toWho;
             }
 
             // send email
