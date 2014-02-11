@@ -36,6 +36,6 @@ class PageController extends ContainerAware
             throw new NotFoundHttpException();
         }
 
-        return $this->container->get('templating')->renderResponse($parameters['page']->getTemplate(), $parameters);
+        return $this->container->get('templating')->renderResponse('MsiCmsBundle:Page:show.html.twig', $parameters);
     }
 }
