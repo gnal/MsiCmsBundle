@@ -15,7 +15,7 @@ class PageAdmin extends Admin
             'form_template' => 'MsiAdminBundle:Page:form.html.twig',
             'sidebar_template' => 'MsiAdminBundle:Page:sidebar.html.twig',
             'search_fields' => ['a.route', 'translations.title'],
-            'order_by'      => ['translations.title' => 'ASC'],
+            // 'order_by'      => ['translations.title' => 'ASC'],
         ];
     }
 
@@ -125,6 +125,7 @@ class PageAdmin extends Admin
 
     public function buildListQuery(QueryBuilder $qb)
     {
+        $qb->orderBy('translations.locale', 'ASC');
         $qb->addOrderBy('translations.title', 'ASC');
     }
 
