@@ -73,7 +73,7 @@ class Mailer
             } else {
                 $bcc = [];
             }
-
+die(var_dump($toWho));
             // send email
 
             $this->send(
