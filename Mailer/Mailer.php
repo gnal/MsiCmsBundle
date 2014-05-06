@@ -15,7 +15,7 @@ class Mailer
         $this->templating = $templating;
     }
 
-    public function sendEmail($name, $data = null, $toWho = null, $attachments = [])
+    public function sendEmail($name, $data = null, $toWho = null, $attachments = [], $fromWho = null)
     {
         $emails = $this->emailManager->findAll(
             [
@@ -77,7 +77,7 @@ class Mailer
             // send email
 
             $this->send(
-                $email->getFromWho(),
+                $fromWho ?: $email->getFromWho(),
                 $to,
                 $cc,
                 $bcc,
