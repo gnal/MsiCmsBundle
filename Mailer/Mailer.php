@@ -15,7 +15,7 @@ class Mailer
         $this->templating = $templating;
     }
 
-    public function sendEmail($name, $data = null, $toWho = null, $attachments = [], $fromWho = null)
+    public function sendEmail($name, $data = null, $toWho = null, $attachments = [], $fromWho = null, $replyTo = [])
     {
         $emails = $this->emailManager->findAll(
             [
@@ -78,6 +78,7 @@ class Mailer
 
             $this->send(
                 $fromWho ?: $email->getFromWho(),
+                $replyTo,
                 $to,
                 $cc,
                 $bcc,
@@ -88,7 +89,7 @@ class Mailer
         }
     }
 
-    protected function send($fromWho, $toWho, $cc, $bcc, $subject, $body, $attachments = [])
+    protected function send($fromWho, $replyTo, $toWho, $cc, $bcc, $subject, $body, $attachments = [])
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
@@ -96,6 +97,7 @@ class Mailer
             ->setTo($toWho)
             ->setCc($cc)
             ->setBcc($bcc)
+            ->setReplyTo($replyTo)
             ->setBody($body, 'text/html')
         ;
 
